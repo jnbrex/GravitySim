@@ -16,7 +16,7 @@ def generate_bodies(
         min_y_velocity: float = -10,
         max_y_velocity: float = 12):
     bodies = set()
-    for i in range(num_bodies):
+    for _ in range(num_bodies):
         bodies.add(Body(
             random.uniform(min_mass, max_mass),
             random.uniform(min_x, max_x),
@@ -30,31 +30,18 @@ bodies = bodies.union(generate_bodies(50, 2, 15, 0, 100, 0, 100, 0, 5, -5, 0))
 bodies = bodies.union(generate_bodies(50, 2, 15, 0, 100, -100, 0, -5, 0, -5, 0))
 bodies = bodies.union(generate_bodies(50, 2, 15, -100, 0, -100, 0, -5, 0, 0, 5))
 bodies = bodies.union(generate_bodies(50, 2, 15, -100, 0, 0, 100, 0, 5, 0, 5))
-
 bodies.add(Body(250, 0, 0))
-# bodies.add(Body(50, 5, -5))
-# bodies.add(Body(5, 5, 5))
-# bodies.add(Body(5, -5, 0))
-# bodies.add(Body(5, -1.5, -0.5))
-# bodies.add(Body(5, 2, -4))
-# bodies.add(Body(6, 6, -5))
-# bodies.add(Body(12, -5, 7))
-# bodies.add(Body(3, -7, 9))
-# bodies.add(Body(7, 8.5, -0.9))
-# bodies.add(Body(9, 20, 4))
-# bodies.add(Body(8, -13, 5.9))
-# bodies.add(Body(7, 14, 0.7))
-# bodies.add(Body(5, -6.5, -3.5))
 
 step_size = 0.005
+max_combination_distance = 0.5
+num_steps = 10000
 
-sim = GravitySim(step_size, bodies)
+sim = GravitySim(bodies, step_size, max_combination_distance)
 
 positions_sequence = []
 masses_sequence = []
 positions_string_sequence = []
 
-num_steps = 10000
 for i in range(num_steps):
     positions, masses = sim.simulate_step()
     positions_sequence.append(positions)

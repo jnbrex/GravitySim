@@ -2,11 +2,13 @@ from body import Body
 import math
 
 class GravitySim:
-    max_combination_distance = 0.5
-
-    def __init__(self, step_size: float, bodies: set[Body]):
-        self.step_size = step_size
+    def __init__(self,
+                 bodies: set[Body],
+                 step_size: float,
+                 max_combination_distance: float):
         self.bodies = bodies
+        self.step_size = step_size
+        self.max_combination_distance = max_combination_distance
     
     def simulate_step(self) -> list[list[float]]:
         self.reset_force_and_acceleration()
